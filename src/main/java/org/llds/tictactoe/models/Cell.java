@@ -1,10 +1,12 @@
-package org.llds.tictactoe.tictactoe;
+package org.llds.tictactoe.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class Cell {
     private Symbol symbol;
     boolean isEmpty(){

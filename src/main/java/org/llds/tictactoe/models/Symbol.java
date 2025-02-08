@@ -1,4 +1,4 @@
-package org.llds.tictactoe.tictactoe;
+package org.llds.tictactoe.models;
 
 public enum Symbol {
     X,
