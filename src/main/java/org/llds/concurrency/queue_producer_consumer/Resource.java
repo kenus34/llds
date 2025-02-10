@@ -1,7 +1,6 @@
 package org.llds.concurrency.queue_producer_consumer;
 
 import java.util.ArrayDeque;
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.UUID;
 
