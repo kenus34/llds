@@ -12,7 +12,7 @@ public class Main {
         });
         Thread thread2= new Thread(()-> {
             try {
-                resource.consume();
+                resource.consume("thread2");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

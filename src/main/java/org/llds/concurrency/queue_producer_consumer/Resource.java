@@ -22,10 +22,11 @@ public class Resource {
         }
     }
 
-    public synchronized void consume() throws InterruptedException {
+    public synchronized void consume(final String name) throws InterruptedException {
         while (true){
+            System.out.println(name+ " Woke up");
             if(queue.size()==max){
-                System.out.println("Consuming messages");
+                System.out.println(name+ " Consuming messages");
                 System.out.println("*****");
                 while (!queue.isEmpty()){
                     System.out.println(queue.poll());

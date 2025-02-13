@@ -41,7 +41,7 @@ public class SharedResource {
     public void consume(){
         while (true){
             reentrantLock.lock();
-            if(queue.size()==MAX_SIZE){
+            if(queue.size()>0){
                 try{
                     System.out.println("Message consumption staring");
                     Thread.sleep(2000);
@@ -56,7 +56,9 @@ public class SharedResource {
                 }
             }else{
                 try {
+                    System.out.println("Starting wait");
                     reentrantCondition.await();
+                    System.out.println("Wait ended");
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
