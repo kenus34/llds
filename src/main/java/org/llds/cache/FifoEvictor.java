@@ -6,12 +6,12 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @AllArgsConstructor
-public class FifiEvictor<K> implements Evictor<K>{
+public class FifoEvictor<K> implements Evictor<K>{
     ConcurrentLinkedDeque<K> concurrentLinkedDeque;
     final private int maxSize;
     private AtomicInteger count;
 
-    public FifiEvictor(int size){
+    public FifoEvictor(int size){
         concurrentLinkedDeque = new ConcurrentLinkedDeque<K>();
         this.maxSize=size;
         this.count = new AtomicInteger(0);

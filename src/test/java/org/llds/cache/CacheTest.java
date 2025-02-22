@@ -9,7 +9,7 @@ class CacheTest {
 
     @Test
     void set() throws InterruptedException {
-        Cache<String, String> cache = new Cache<>(new ConcurrentHashMap<>(), new FifiEvictor<>(3));
+        Cache<String, String> cache = new Cache<>(new ConcurrentHashMap<>(), new FifoEvictor<>(3));
         cache.set("key", "value");
         cache.set("key1", "value", 1L);
         Thread.sleep(2000);
@@ -19,7 +19,7 @@ class CacheTest {
 
     @Test
     void testSet() throws InterruptedException {
-        Cache<String, String> cache = new Cache<>(new ConcurrentHashMap<>(), new FifiEvictor<>(3));
+        Cache<String, String> cache = new Cache<>(new ConcurrentHashMap<>(), new FifoEvictor<>(3));
         cache.set("key", "value");
         cache.set("key1", "value", 1L);
         Thread.sleep(2000);
@@ -37,7 +37,7 @@ class CacheTest {
 
     @Test
     void parallelList() {
-        Cache<String, String> cache = new Cache<>(new ConcurrentHashMap<>(), new FifiEvictor<>(3));
+        Cache<String, String> cache = new Cache<>(new ConcurrentHashMap<>(), new FifoEvictor<>(3));
         cache.set("key", "value");
         cache.set("key1", "value", 1L);
         cache.parallelList();
