@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class CrudService {
-    private ConcurrentLinkedDeque<Entity> entities;
+    protected ConcurrentLinkedDeque<Entity> entities;
     private AtomicInteger counter;
 
     public CrudService(){

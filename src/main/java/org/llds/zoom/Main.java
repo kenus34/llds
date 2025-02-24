@@ -23,7 +23,14 @@ public class Main {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println(userService.size());
-        userService.listDisc();
+        System.out.println(userService.getById(10).get());
+        User up = User.builder()
+                .name("Kent")
+                .number(8111882666L)
+                .status(UserStatus.BLOCKED)
+                .build();
+        up.setId(10);
+        userService.update(up);
+        System.out.println(userService.getById(10).get());
     }
 }
