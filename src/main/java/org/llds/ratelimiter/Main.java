@@ -10,15 +10,10 @@ public class Main {
             }else{
                 System.out.println("Call failed"+ t2 + " " + i);
             }
-            try {
-                Thread.sleep(80);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
     public static void main(String[] args) throws InterruptedException {
-        RateLimiter rateLimiter = new RateLimiter(new IntervalFilling(1,10));
+        RateLimiter rateLimiter = new RateLimiter(new QueueIntervalFilling(1L,10L));
         RateLimiterService rateLimiterService = new RateLimiterService();
         rateLimiterService.add("emerald", rateLimiter);
         Thread thread1 = new Thread(() -> abc(rateLimiterService,"t1"));

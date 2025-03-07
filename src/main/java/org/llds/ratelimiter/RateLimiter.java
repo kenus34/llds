@@ -17,19 +17,14 @@ public class RateLimiter {
     public boolean callAllowed(String id) {
         if(metaMap.containsKey(id)){
             rateLimiterStrategy.refill(metaMap, id);
-            Meta meta = metaMap.get(id);
-            Long tc=meta.tokenCount.get();
-            if(tc>0L){
-                if(meta.getTokenCount().compareAndSet(tc, tc-1)){
-                    return true;
-                }else{
-                    return callAllowed(id);
-                }
-            }else{
+            if(metaMap.get(id).deque.pollFirst()==null){
                 return false;
+            }else{
+                rateLimiterStrategy.decrease();
+                return true;
             }
         }else{
-            metaMap.put(id, Meta.builder().tokenCount(new AtomicLong(10L)).lastAccessed(System.currentTimeMillis()).build());
+            metaMap.put(id, new Meta());
             return callAllowed(id);
         }
     }
