@@ -1,13 +1,19 @@
 package org.llds.parking_lot;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
+@Builder
 public class ParkingLot {
-    List<Level> lots;
-    ParkingStrategy parkingStrategy;
+    private List<Level> lots;
+    private ParkingStrategy parkingStrategy;
+
+    Spot getSpot(SpotType type){
+        return parkingStrategy.getSpot(lots, type);
+    }
 }

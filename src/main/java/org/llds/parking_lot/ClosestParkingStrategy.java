@@ -5,14 +5,20 @@ import java.util.Optional;
 
 public class ClosestParkingStrategy implements ParkingStrategy{
     @Override
-    public Spot getSpot(List<Level> lots) {
+    public Spot getSpot(List<Level> lots, SpotType type) {
         for(int i=0;i<lots.size();++i){
             Optional<Spot> parkingSpot = lots.get(i).getSpots().stream()
-                    .filter(spot -> spot.getStatus()==SpotStatus.AVAILABLE)
+                    .filter(spot -> spot.getStatus().get()==SpotStatus.AVAILABLE&&spot.getType()==type)
                     .findFirst();
-            parkingSpot.ifPresent(spot -> spot.status = SpotStatus.AVAILABLE);
-            return parkingSpot.get();
+            if(parkingSpot.isPresent()){
+                boolean success = parkingSpot.get().status.compareAndSet(SpotStatus.AVAILABLE,SpotStatus.UNAVAILABLE);
+                if(!success){
+                    return getSpot(lots, type);
+                }
+
+                return parkingSpot.get();
+            }
         }
-        return null;
+        throw new RuntimeException("Spot unavailable");
     }
 }
