@@ -1,9 +1,11 @@
 package org.llds.logging;
 
+import lombok.AllArgsConstructor;
 import org.llds.logging.appender.Appender;
 
 import java.util.Map;
 
+@AllArgsConstructor
 public class LoggingHelper {
     Map<String, Appender> map;
     private Appender defaultConfig;

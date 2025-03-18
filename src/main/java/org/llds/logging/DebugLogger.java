@@ -7,12 +7,11 @@ public class DebugLogger extends Logger {
 
     @Override
     public void write(String s, String cname, LogType logType) {
-        if(next==null){
-            return;
-        }
-        if(logType == LogType.INFO){
+        if(logType == LogType.DEBUG){
             loggingHelper.getAppender(cname).write("debug: "+s);
         }
-        next.write(s, cname, logType);
+        if(next!=null){
+            next.write(s, cname, logType);
+        }
     }
 }

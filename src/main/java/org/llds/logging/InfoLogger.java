@@ -7,12 +7,11 @@ public class InfoLogger extends Logger{
 
     @Override
     public void write(String s, String cname, LogType logType) {
-        if(next==null){
-            return;
-        }
         if(logType == LogType.INFO){
             loggingHelper.getAppender(cname).write("info: "+s);
         }
-        next.write(s, cname, logType);
+        if(next!=null){
+            next.write(s, cname, logType);
+        }
     }
 }
